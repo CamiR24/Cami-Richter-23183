@@ -1,5 +1,6 @@
 import cProfile
 import random
+import time
 
 def merge_sort(arr, ascending=True):
     if len(arr) > 1:
@@ -44,6 +45,12 @@ def profile_merge_sort(arr, ascending=True):
     profiler.disable()
     profiler.print_stats(sort='cumulative')
 
+def sort_and_time(arr, ascending=True):
+    start_time = time.time()
+    merge_sort(arr, ascending)
+    end_time = time.time()
+    return end_time - start_time
+
 if __name__ == "__main__":
     # Ejemplo de uso
     size = int(input("Ingrese la cantidad de elementos: "))
@@ -63,3 +70,12 @@ if __name__ == "__main__":
         merge_sort(array, ascending_order)
 
     print("Array después del ordenamiento:", array)
+
+    sort_again = input("¿Desea ordenar el array nuevamente (Sí/No)? ").lower()
+    if sort_again.startswith('s'):
+        sorted_array = sorted(array, reverse=not ascending_order)  # Ordena nuevamente el array
+        start_time = time.time()
+        merge_sort(sorted_array, ascending_order)
+        end_time = time.time()
+        print("Array ordenado nuevamente:", sorted_array)
+        print("Tiempo de ordenamiento para un array ya ordenado:", end_time - start_time)

@@ -30,7 +30,7 @@ public class Student extends User implements IUserFactory{
     }
     
     public void ConsultStudentGrades(){
-
+        
     }
 
     public void pay(){

@@ -1,7 +1,6 @@
 import java.util.*;
+import java.util.stream.Collectors;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Student extends User implements IUserFactory{
     @Override
@@ -30,7 +29,26 @@ public class Student extends User implements IUserFactory{
     }
     
     public void ConsultStudentGrades(){
-        
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ingrese el nombre del curso para consultar la nota:");
+        String courseName = scanner.nextLine(); // Leer el código del curso ingresado por el usuario
+
+        List<Map<String, String>> grades = CSVDataSource.showData("NOTA");
+        if (grades.isEmpty()) {
+            System.out.println("Aún no hay notas disponibles.");
+        } else {
+            // Filtrar primero por ID del estudiante y luego por código del curso
+            List<Map<String, String>> filteredGrades = grades.stream()
+                    //.filter(grade -> grade.get("NOMBRE").equals(this.getName()) && grade.get("CURSO").equals(courseName))
+                    .collect(Collectors.toList());
+
+            if (filteredGrades.isEmpty()) {
+                System.out.println("No se encontraron notas para el curso con nombre: " + courseName);
+            } else {
+                filteredGrades.forEach(grade -> 
+                    System.out.println("Clase: " + grade.get("CURSO") + ", Nota: " + grade.get("NOTA")));
+            }
+        }    
     }
 
     public void pay(){

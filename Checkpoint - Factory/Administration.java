@@ -96,7 +96,7 @@ public class Administration extends User implements IUserFactory {
         newStudent.put("professorID", studentID);
         students.add(newStudent);
 
-        CSVDataSource.saveData("profesores", students);
+        CSVDataSource.saveData("estudientes", students);
         System.out.println("Estudiante creado");
         scanner.close();
     }

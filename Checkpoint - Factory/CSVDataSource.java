@@ -36,7 +36,7 @@ public class CSVDataSource {
         }
     }
 
-    public static List<Map<String, String>> loadData(String category) {
+    public static List<Map<String, String>> showData(String category) {
         List<Map<String, String>> data = new ArrayList<>();
         Path path = Paths.get(paths + category + ".csv");
         try (Stream<String> lines = Files.lines(path)) {

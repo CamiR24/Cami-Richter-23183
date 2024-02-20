@@ -14,14 +14,17 @@ import java.util.stream.Stream;
 
 public class CSVDataSource {
 
-    public void saveData(String category, List<Map<String, String>> data) {
+    private final static String paths = "";
+
+    public static void saveData(String category, List<Map<String, String>> data) {
         try {
-            File file = new File("Informacion.csv");
+            File file = new File(paths + category + ".csv");
             boolean isNewFile = file.createNewFile(); // Crea el archivo si no existe y verifica si es nuevo
             try (PrintWriter pw = new PrintWriter(new FileWriter(file, true))) {
                 if (isNewFile) {
                     // Suponiendo que todos los mapas tienen las mismas claves, toma el primer elemento para los encabezados
-                    pw.println("NOMBRE, CONTRASEÑA TIPO, PAGO MATRICULA, MONTO PAGO, COBRO, MONTO COBRO, CURSO ASIGNADO, CURSO 1, NOTA"); // Escribe los encabezados
+                    String headers = String.join(",", data.get(0).keySet());
+                    pw.println(headers);
                 }
                 for (Map<String, String> row : data) {
                     String line = String.join(",", row.values());
@@ -33,9 +36,9 @@ public class CSVDataSource {
         }
     }
 
-    public List<Map<String, String>> loadData(String category) {
+    public static List<Map<String, String>> loadData(String category) {
         List<Map<String, String>> data = new ArrayList<>();
-        Path path = Paths.get("Informacion.csv");
+        Path path = Paths.get(paths + category + ".csv");
         try (Stream<String> lines = Files.lines(path)) {
             List<String> allLines = lines.collect(Collectors.toList());
             if (!allLines.isEmpty()) {

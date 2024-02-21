@@ -21,10 +21,9 @@ public class Administration extends Users implements IUserFactory {
         System.out.println("6. asignar pago al catedrático");
         System.out.println("7. consultar resumen de notas del estudiante");
         System.out.println("8. consultar resumen de pagos del estudiante");
-    }
 
-    @Override
-    void action(int option) {
+        Scanner scanner = new Scanner(System.in);
+        int option = scanner.nextInt();
         switch(option){
             case 1:
                 createCourse();
@@ -54,6 +53,7 @@ public class Administration extends Users implements IUserFactory {
                 System.out.println("Opción no valida");
                 break;
         }
+        scanner.close();
     }
 
     public void createCourse(){

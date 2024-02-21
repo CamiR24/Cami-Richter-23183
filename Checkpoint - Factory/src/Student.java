@@ -13,10 +13,9 @@ public class Student extends Users implements IUserFactory{
         System.out.println("1. consultar nota en una asignatura");
         System.out.println("2. realizar pago");
         System.out.println("3. consultar pagos");
-    }
 
-    @Override
-    void action(int option) {
+        Scanner scanner = new Scanner(System.in);
+        int option = scanner.nextInt();
         switch(option){
             case 1:
                 ConsultStudentGrades();
@@ -31,6 +30,7 @@ public class Student extends Users implements IUserFactory{
                 System.out.println("Opción no valida");
                 break;
         }
+        scanner.close();
     }
     
     public void ConsultStudentGrades(){

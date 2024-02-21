@@ -37,5 +37,4 @@ public abstract class Users {
     }
 
     abstract void showOptions();
-    abstract void action(int option);
 }

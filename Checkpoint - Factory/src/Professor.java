@@ -1,7 +1,5 @@
 package src;
 import java.util.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Professor extends Users implements IUserFactory{
     
@@ -14,10 +12,9 @@ public class Professor extends Users implements IUserFactory{
         System.out.println("1. Ingresar notas del estudiante en una asignatura");
         System.out.println("2. cobrar pago");
         System.out.println("3. historial de pagos");
-    }
 
-    @Override
-    void action(int option) {
+        Scanner scanner = new Scanner(System.in);
+        int option = scanner.nextInt();
         switch(option){
             case 1:
                 AddGrades();
@@ -32,6 +29,7 @@ public class Professor extends Users implements IUserFactory{
                 System.out.println("Opción no valida");
                 break;
         }
+        scanner.close();
     }
     
     public void AddGrades(){

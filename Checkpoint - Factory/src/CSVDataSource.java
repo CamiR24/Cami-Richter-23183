@@ -1,3 +1,4 @@
+package src;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,7 +15,7 @@ import java.util.stream.Stream;
 
 public class CSVDataSource {
 
-    private final static String paths = "";
+    private final static String paths = "src/";
 
     public static void saveData(String category, List<Map<String, String>> data) {
         try {

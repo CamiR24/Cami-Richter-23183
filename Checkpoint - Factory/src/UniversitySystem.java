@@ -1,3 +1,4 @@
+package src;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -5,10 +6,8 @@ import java.util.Scanner;
 public class UniversitySystem {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        CSVDataSource dataSource = new CSVDataSource(); // Asumiendo que esta clase ya está implementada adecuadamente
-
         // Carga de usuarios desde el archivo CSV
-        List<Map<String, String>> usersData = dataSource.showData("usuarios");
+        List<Map<String, String>> usersData = CSVDataSource.showData("usuarios");
 
         System.out.println("Ingrese su nombre:");
         String name = scanner.nextLine();

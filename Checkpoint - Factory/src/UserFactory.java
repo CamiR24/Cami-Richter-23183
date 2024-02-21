@@ -1,3 +1,5 @@
+package src;
+
 public class UserFactory {
     
     public static final int AUDIT_TYPE= 1;

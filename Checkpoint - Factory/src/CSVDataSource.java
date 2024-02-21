@@ -43,18 +43,25 @@ public class CSVDataSource {
         try (Stream<String> lines = Files.lines(path)) {
             List<String> allLines = lines.collect(Collectors.toList());
             if (!allLines.isEmpty()) {
+                // Diagnóstico: Imprime la ruta absoluta del archivo
+                System.out.println("Ruta absoluta del archivo CSV: " + path.toAbsolutePath());
+                
                 String[] headers = allLines.get(0).split(",");
-                for (int i = 1; i < allLines.size(); i++) { // Empieza en 1 para saltar los encabezados
+                
+                for (int i = 1; i < allLines.size(); i++) {
+                    // Dividir cada línea en sus componentes y trimarlos para eliminar espacios adicionales
                     String[] values = allLines.get(i).split(",");
                     Map<String, String> row = new HashMap<>();
                     for (int j = 0; j < headers.length; j++) {
-                        row.put(headers[j], values[j]);
+                        // Asegúrate de trimar tanto las claves como los valores
+                        row.put(headers[j].trim(), j < values.length ? values[j].trim() : "");
                     }
+                    // Diagnóstico: Imprime cada fila leída
                     data.add(row);
                 }
             }
         } catch (IOException e) {
-            //e.printStackTrace();
+            e.printStackTrace();
         }
         return data;
     }

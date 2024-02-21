@@ -1,6 +1,7 @@
 package src;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class UniversitySystem {
@@ -9,14 +10,18 @@ public class UniversitySystem {
         // Carga de usuarios desde el archivo CSV
         List<Map<String, String>> usersData = CSVDataSource.showData("usuarios");
 
-        System.out.println("Ingrese su nombre:");
+        System.out.println("¡Bienvenido!");
+        System.out.println("Ingrese su nombre de usuario:");
         String name = scanner.nextLine();
         System.out.println("Ingrese su contraseña:");
         String password = scanner.nextLine();
 
         Users userFactoryauthenticated = null;
         for (Map<String, String> userData : usersData) {
-            if (userData.get("Nombre").equals(name) && userData.get("Contraseña").equals(password)) {
+            String nombre = userData.get("Nombre");
+            String contraseña = userData.get("Contraseña");
+
+            if (Objects.equals(nombre, name) && Objects.equals(contraseña, password)) {
                 // Autenticación exitosa, determinar el tipo de usuario
                 String tipoUsuario = userData.get("TipoUsuario");
                 int userType = getType(tipoUsuario);
@@ -28,7 +33,7 @@ public class UniversitySystem {
         if (userFactoryauthenticated != null) {
             userFactoryauthenticated.showOptions(); // Mostrar el menú específico del tipo de usuario autenticado
         } else {
-            System.out.println("Credenciales no válidas o tipo de usuario no reconocido.");
+            System.out.println("El usuario no se ha encontrado.");
         }
 
         scanner.close();

@@ -1,8 +1,12 @@
 import java.util.*;
 import java.util.stream.Collectors;
-import java.io.*;
 
-public class Student extends User implements IUserFactory{
+public class Student extends Users implements IUserFactory{
+    
+    public Student(String id, String name, String password) {
+        super(id, name, password);
+    }
+
     @Override
     public void showOptions() {
         System.out.println("1. consultar nota en una asignatura");
@@ -48,20 +52,34 @@ public class Student extends User implements IUserFactory{
                 filteredGrades.forEach(grade -> 
                     System.out.println("Clase: " + grade.get("CURSO") + ", Nota: " + grade.get("NOTA")));
             }
-        }    
+        } 
+        scanner.close();   
     }
 
     public void pay(){
-
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ingrese el monto del pago:");
+        String amount = scanner.nextLine();
+        
+        // Usar LinkedHashMap para mantener el orden de inserción
+        Map<String, String> paymentData = new LinkedHashMap<>();
+        paymentData.put("status", "completed"); // Asegurarse de agregar los elementos en el orden deseado
+        paymentData.put("amount", amount);
+        paymentData.put("studentId", this.getName());
+        
+        CSVDataSource.saveData("pagos", List.of(paymentData));
+        System.out.println("Pago realizado correctamente.");
+        scanner.close();
     }
 
     public void consultPayment(){
-
-    }
-
-    @Override
-    public User createUser(int userType) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createUser'");
+        List<Map<String, String>> payments = CSVDataSource.showData("pagos");
+        if (payments.isEmpty()) {
+            System.out.println("Aún no hay pagos realizados.");
+        } else {
+            payments.stream()
+                    .filter(payment -> payment.get("studentName").equals(this.getName()))
+                    .forEach(payment -> System.out.println("Monto: " + payment.get("amount") + ", Estado: " + payment.get("status")));
+        }
     }
 }

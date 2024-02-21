@@ -1,10 +1,16 @@
+package src;
 import java.util.Scanner;
 import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Administration extends User implements IUserFactory {
+public class Administration extends Users implements IUserFactory {
+    
+    public Administration(String id, String name, String password) {
+        super(id, name, password);
+    }
+    
     @Override
     public void showOptions() {
         System.out.println("1. crear curso");
@@ -169,11 +175,5 @@ public class Administration extends User implements IUserFactory {
         System.out.println("Resumen de Pagos:");
         List<Map<String, String>> payments = CSVDataSource.showData("pagos");
         payments.forEach(payment -> System.out.println("Nombre Estudiante: " + payment.get("studentId") + ", Monto: " + payment.get("amount") + ", Estatus: " + payment.get("status")));
-    }
-
-    @Override
-    public User createUser(int userType) {
-        
-        throw new UnsupportedOperationException("Unimplemented method 'createUser'");
     }
 }

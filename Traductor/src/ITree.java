@@ -1,11 +1,13 @@
-public interface ITree<K, V>{
+public interface ITree<K,V1,V2>{
 
-    void insert(K key, V value);
+    void insert(K key, V1 value1, V2 value2);
 
-    V find(K keyToFind);
+    V1 find1(K keyToFind);
+
+    V2 find2(K keyToFind);
 
     boolean isEmpty();
 
-    void InOrderWalk(IWalk<V> walk);
+    void InOrderWalk(IWalk<V1,V2> walk);
 
 }

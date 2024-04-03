@@ -1,5 +1,7 @@
-public interface IWalk<V> {
+public interface IWalk<V1,V2> {
 
-    void doWalk(V actualValue);
+    void doWalk(V1 actualValue);
+
+    void walk(V2 actualValue);
     
 }

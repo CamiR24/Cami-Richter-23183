@@ -59,7 +59,32 @@ public class Main {
         } else {
             System.out.println("Lo sentimos, no pudimos encontrar la traducción para la palabra '" + word + "'.");
         }
-    }
+
+        System.out.println("Desea imprimir el diccionario completo?");
+        System.out.println("1: español");
+        System.out.println("2: inglés");
+        System.out.println("3: francés");
+
+            int option = scanner.nextInt();
+
+            switch (option) {
+                case 1:
+                    spanishTree.inorderTraversal(spanishTree);
+                    break;
+
+                case 2:
+                    englishTree.inorderTraversal(englishTree);
+                    break;
+
+                case 3:
+                    frenchTree.inorderTraversal(frenchTree);
+                    break;
+            
+                default:
+                    break;
+            }
+            
+        }
 
     public static String translate(String word, BinarySearchTree<String, String, String> englishTree, BinarySearchTree<String, String, String> spanishTree, BinarySearchTree<String, String, String> frenchTree, String language) {
         String translation1 = null;

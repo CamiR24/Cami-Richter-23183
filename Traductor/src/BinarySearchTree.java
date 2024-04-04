@@ -205,4 +205,17 @@ public class BinarySearchTree<K,V1,V2> implements ITree<K,V1,V2> {
             internalInOrderWalkForFrench(actualNode.getRight(), walk);
         }
     }
+
+    public void inorderTraversal(TreeNode<K, V1, V2> node) {
+        if (node != null) {
+            inorderTraversal(node.getLeft());
+            System.out.println(node.getKey() + ": " + node.getValue1() + ", " + node.getValue2());
+            inorderTraversal(node.getRight());
+        }
+    }
+
+    public void inorderTraversal(BinarySearchTree<K, V1, V2> tree) {
+        inorderTraversal(tree.root);
+    }
+    
 }

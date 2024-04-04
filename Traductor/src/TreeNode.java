@@ -63,7 +63,4 @@ public class TreeNode<K, V1, V2> {
     public void setParent(TreeNode<K,V1,V2> parent) {
         this.parent = parent;
     }
-
-    
-
 }

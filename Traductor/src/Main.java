@@ -42,7 +42,7 @@ public class Main {
             try (Stream<String> lines = Files.lines(frenchPath)) {
                 lines.forEach(line -> {
                     String[] parts = line.split(",");
-                    frenchTree.insert(parts[0].trim(), parts[1].trim(), parts[2].trim());
+                    frenchTree.insert(parts[2].trim(), parts[1].trim(), parts[0].trim());
                 });
             } catch (IOException e) {
                 e.printStackTrace();
@@ -62,26 +62,21 @@ public class Main {
     }
 
     public static String translate(String word, BinarySearchTree<String, String, String> englishTree, BinarySearchTree<String, String, String> spanishTree, BinarySearchTree<String, String, String> frenchTree, String language) {
-        String translation = null;
+        String translation1 = null;
+        String translation2 = null;
 
         if (language.equalsIgnoreCase("english")) {
-            translation = englishTree.find1(word);
-            if (translation == null) {
-                translation = frenchTree.find2(word);
-            }
+            translation1 = englishTree.find1(word);
+            translation2 = englishTree.find2(word);
         } else if (language.equalsIgnoreCase("spanish")) {
-            translation = spanishTree.find1(word);
-            if (translation == null) {
-                translation = frenchTree.find2(word);
-            }
+            translation1 = spanishTree.find1(word);
+            translation2 = spanishTree.find2(word);
         } else if (language.equalsIgnoreCase("french")) {
-            translation = frenchTree.find1(word);
-            if (translation == null) {
-                translation = englishTree.find2(word);
-            }
+            translation1 = frenchTree.find1(word);
+            translation2 = frenchTree.find2(word);
         }
 
-        return translation;
+        return translation1 + ", " + translation2;
     }
 }
 

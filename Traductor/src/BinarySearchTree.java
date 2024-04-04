@@ -143,9 +143,7 @@ public class BinarySearchTree<K,V1,V2> implements ITree<K,V1,V2> {
         if (actualNode != null){
             InternalInOrderWalk(actualNode.getLeft(), walk);
 
-            walk.doWalk(actualNode.getValue1());
-
-            walk.walk(actualNode.getValue2());
+            walk.doWalk(actualNode.getValue1(), actualNode.getValue2());
 
             InternalInOrderWalk(actualNode.getRight(), walk);
         }
@@ -194,8 +192,7 @@ public class BinarySearchTree<K,V1,V2> implements ITree<K,V1,V2> {
     private void internalInOrderWalkForSpanish(TreeNode<K, V1, V2> actualNode, IWalk<V1, V2> walk) {
         if (actualNode != null) {
             internalInOrderWalkForSpanish(actualNode.getLeft(), walk);
-            walk.doWalk(actualNode.getValue1());
-            walk.walk(actualNode.getValue2());
+            walk.doWalk(actualNode.getValue1(), actualNode.getValue2());
             internalInOrderWalkForSpanish(actualNode.getRight(), walk);
         }
     }
@@ -204,8 +201,7 @@ public class BinarySearchTree<K,V1,V2> implements ITree<K,V1,V2> {
     private void internalInOrderWalkForFrench(TreeNode<K, V1, V2> actualNode, IWalk<V1, V2> walk) {
         if (actualNode != null) {
             internalInOrderWalkForFrench(actualNode.getLeft(), walk);
-            walk.doWalk(actualNode.getValue1()); // Corrected V2 to V1
-            walk.walk(actualNode.getValue2()); // Corrected V1 to V2
+            walk.doWalk(actualNode.getValue1(), actualNode.getValue2()); // Corrected V2 to V1
             internalInOrderWalkForFrench(actualNode.getRight(), walk);
         }
     }

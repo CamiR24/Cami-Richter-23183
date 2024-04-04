@@ -3,6 +3,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Stream;
 
 public class BinarySearchTree<K,V1,V2> implements ITree<K,V1,V2> {
@@ -10,12 +12,17 @@ public class BinarySearchTree<K,V1,V2> implements ITree<K,V1,V2> {
     private int count;
     private TreeNode<K,V1,V2> root;
     private Comparator<K> keyComparator;
-    private int language;
+    private Map<String, Integer> languageMap;
 
     public BinarySearchTree(Comparator<K> keyComparator){
         this.root = null;
         this.count = 0;
         this.keyComparator = keyComparator;
+        this.languageMap = new HashMap<>();
+        languageMap.put("english", 1);
+        languageMap.put("spanish", 2);
+        languageMap.put("french", 3);
+
     }
 
     @Override
@@ -113,6 +120,21 @@ public class BinarySearchTree<K,V1,V2> implements ITree<K,V1,V2> {
     }
 
     @Override
+    public TreeNode<K, V1, V2> getFirstNode() {
+        if (isEmpty()) {
+            return null;
+        }
+
+        TreeNode<K, V1, V2> node = root;
+
+        while (node.getLeft() != null) {
+            node = node.getLeft();
+        }
+
+        return node;
+    }
+
+    @Override
     public void InOrderWalk(IWalk<V1,V2> walk) {
         InternalInOrderWalk(root, walk);
     }
@@ -135,31 +157,56 @@ public class BinarySearchTree<K,V1,V2> implements ITree<K,V1,V2> {
             lines.forEach(line -> {
                 String[] parts = line.split(",");
 
-                switch (language) {
-                    case 1:
-                        K keyEnglish = (K) parts[0].trim(); // La llave sería la palabra en inglés
-                        V1 value1Spanish = (V1) parts[1].trim(); // El valor sería la palabra en español
-                        V2 value2French = (V2) parts[2].trim();
-                        this.insert(keyEnglish, value1Spanish, value2French);
-                        break;
-                    case 2:
-                        K keySpanish = (K) parts[1].trim(); // La llave sería la palabra en inglés
-                        V1 value1French = (V1) parts[2].trim(); // El valor sería la palabra en español
-                        V2 value2English = (V2) parts[0].trim();
-                        this.insert(keySpanish, value1French, value2English);
-                        break;
-                    case 3:
-                        K keyFrench = (K) parts[0].trim(); // La llave sería la palabra en inglés
-                        V1 value1English = (V1) parts[1].trim(); // El valor sería la palabra en español
-                        V2 value2Spanish = (V2) parts[2].trim();
-                        this.insert(keyFrench, value1English, value2Spanish);
-                        break;
-                    default:
-                        break;
+                int maxLanguageIndex = Math.max(Math.max(languageMap.get("english"), languageMap.get("spanish")), languageMap.get("french"));
+                K key;
+                V1 value1;
+                V2 value2;
+                if (maxLanguageIndex == languageMap.get("english")) {
+                    key = (K) parts[0].trim();
+                    value1 = (V1) parts[1].trim();
+                    value2 = (V2) parts[2].trim();
+                } else if (maxLanguageIndex == languageMap.get("spanish")) {
+                    key = (K) parts[1].trim();
+                    value1 = (V1) parts[2].trim();
+                    value2 = (V2) parts[0].trim();
+                } else {
+                    key = (K) parts[2].trim();
+                    value1 = (V1) parts[0].trim();
+                    value2 = (V2) parts[1].trim();
                 }
+                this.insert(key, value1, value2);
             });
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void inOrderWalkForLanguage(IWalk<V1, V2> walk, String language) {
+        if ("english".equalsIgnoreCase(language)) {
+            InternalInOrderWalk(root, walk);
+        } else if ("spanish".equalsIgnoreCase(language)) {
+            internalInOrderWalkForSpanish(root, walk);
+        } else if ("french".equalsIgnoreCase(language)) {
+            internalInOrderWalkForFrench(root, walk);
+        }
+    }
+
+    private void internalInOrderWalkForSpanish(TreeNode<K, V1, V2> actualNode, IWalk<V1, V2> walk) {
+        if (actualNode != null) {
+            internalInOrderWalkForSpanish(actualNode.getLeft(), walk);
+            walk.doWalk(actualNode.getValue1());
+            walk.walk(actualNode.getValue2());
+            internalInOrderWalkForSpanish(actualNode.getRight(), walk);
+        }
+    }
+
+
+    private void internalInOrderWalkForFrench(TreeNode<K, V1, V2> actualNode, IWalk<V1, V2> walk) {
+        if (actualNode != null) {
+            internalInOrderWalkForFrench(actualNode.getLeft(), walk);
+            walk.doWalk(actualNode.getValue1()); // Corrected V2 to V1
+            walk.walk(actualNode.getValue2()); // Corrected V1 to V2
+            internalInOrderWalkForFrench(actualNode.getRight(), walk);
         }
     }
 }

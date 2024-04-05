@@ -206,7 +206,7 @@ public class BinarySearchTree<K,V1,V2> implements ITree<K,V1,V2> {
         }
     }
 
-    public void inorderTraversal(TreeNode<K, V1, V2> node) {
+    public void inorderTraversal(TreeNode<K,V1,V2> node) {
         if (node != null) {
             inorderTraversal(node.getLeft());
             System.out.println(node.getKey() + ": " + node.getValue1() + ", " + node.getValue2());
@@ -214,8 +214,8 @@ public class BinarySearchTree<K,V1,V2> implements ITree<K,V1,V2> {
         }
     }
 
-    public void inorderTraversal(BinarySearchTree<K, V1, V2> tree) {
+    public void inorderTraversal(BinarySearchTree<K,V1,V2> tree) {
         inorderTraversal(tree.root);
-    }
     
+}
 }

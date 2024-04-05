@@ -103,5 +103,6 @@ public class Main {
 
         return translation1 + ", " + translation2;
     }
+    
 }
 

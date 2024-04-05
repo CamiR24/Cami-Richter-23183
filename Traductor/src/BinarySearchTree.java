@@ -1,3 +1,5 @@
+package src;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -6,6 +8,8 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
+
+import org.w3c.dom.Node;
 
 public class BinarySearchTree<K,V1,V2> implements ITree<K,V1,V2> {
 
@@ -206,16 +210,18 @@ public class BinarySearchTree<K,V1,V2> implements ITree<K,V1,V2> {
         }
     }
 
-    public void inorderTraversal(TreeNode<K,V1,V2> node) {
-        if (node != null) {
-            inorderTraversal(node.getLeft());
-            System.out.println(node.getKey() + ": " + node.getValue1() + ", " + node.getValue2());
-            inorderTraversal(node.getRight());
+    public void displayBST(BinarySearchTree<K,V1,V2> tree) {
+        if (root != null) {
+            displayBST(tree.root);
         }
     }
-
-    public void inorderTraversal(BinarySearchTree<K,V1,V2> tree) {
-        inorderTraversal(tree.root);
     
+    private void displayBST(TreeNode<K,V1,V2> node) {
+        if (node != null) {
+            displayBST(node.getLeft());
+            System.out.println("Key: " + node.getKey() + ", Value1: " + node.getValue1() + ", Value2: " + node.getValue2());
+            displayBST(node.getRight());
+        }
 }
 }
+

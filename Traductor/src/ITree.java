@@ -1,3 +1,5 @@
+package src;
+
 public interface ITree<K,V1,V2>{
 
     void insert(K key, V1 value1, V2 value2);

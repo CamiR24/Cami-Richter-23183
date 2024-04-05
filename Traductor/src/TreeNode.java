@@ -1,8 +1,10 @@
+package src;
+
 public class TreeNode<K, V1, V2> {
     
     private K key;
     private V1 value1;
-    private V2 value2;
+    V2 value2;
     private TreeNode<K,V1,V2> left;
     private TreeNode<K,V1,V2> right;
     private TreeNode<K,V1,V2> parent;

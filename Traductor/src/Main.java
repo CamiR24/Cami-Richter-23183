@@ -1,3 +1,5 @@
+package src; 
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -69,15 +71,15 @@ public class Main {
 
             switch (option) {
                 case 1:
-                    spanishTree.inorderTraversal(spanishTree);
+                spanishTree.displayBST(spanishTree);
                     break;
 
                 case 2:
-                    englishTree.inorderTraversal(englishTree);
+                    englishTree.displayBST(englishTree);
                     break;
 
                 case 3:
-                    frenchTree.inorderTraversal(frenchTree);
+                    frenchTree.displayBST(frenchTree);
                     break;
             
                 default:
@@ -103,6 +105,5 @@ public class Main {
 
         return translation1 + ", " + translation2;
     }
-    
-}
 
+}

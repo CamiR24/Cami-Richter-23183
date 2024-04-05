@@ -9,8 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
-import org.w3c.dom.Node;
-
 public class BinarySearchTree<K,V1,V2> implements ITree<K,V1,V2> {
 
     private int count;

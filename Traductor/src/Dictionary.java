@@ -36,4 +36,16 @@ public class Dictionary {
         }
     }
 
+    public BinarySearchTree<String, String, String> getTree(int language) {
+        if (language == 1) {
+            return englishTree;
+        } else if (language == 2) {
+            return spanishTree;
+        } else if (language == 3) {
+            return frenchTree;
+        } else {
+            throw new IllegalArgumentException("Invalid language code");
+        }
+    }
+
 }

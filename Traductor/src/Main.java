@@ -91,6 +91,11 @@ public class Main {
                 default:
                     break;
             }
+
+        String translatedText = Translator.translateFromFile("texto.txt", englishTree, spanishTree, frenchTree);
+        System.out.println(translatedText);
+
+        scanner.close();
             
         }
 

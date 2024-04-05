@@ -25,6 +25,8 @@ public class Main {
                 lines.forEach(line -> {
                     String[] parts = line.split(",");
                     englishTree.insert(parts[0].trim(), parts[1].trim(), parts[2].trim());
+                    spanishTree.insert(parts[1].trim(), parts[2].trim(), parts[0].trim());
+                    frenchTree.insert(parts[1].trim(), parts[2].trim(), parts[0].trim());
                 });
             } catch (IOException e) {
                 e.printStackTrace();
@@ -35,6 +37,8 @@ public class Main {
                 lines.forEach(line -> {
                     String[] parts = line.split(",");
                     spanishTree.insert(parts[1].trim(), parts[2].trim(), parts[0].trim());
+                    frenchTree.insert(parts[1].trim(), parts[2].trim(), parts[0].trim());
+                    englishTree.insert(parts[1].trim(), parts[2].trim(), parts[0].trim());
                 });
             } catch (IOException e) {
                 e.printStackTrace();
@@ -45,6 +49,8 @@ public class Main {
                 lines.forEach(line -> {
                     String[] parts = line.split(",");
                     frenchTree.insert(parts[2].trim(), parts[1].trim(), parts[0].trim());
+                    englishTree.insert(parts[0].trim(), parts[1].trim(), parts[2].trim());
+                    spanishTree.insert(parts[1].trim(), parts[2].trim(), parts[0].trim());
                 });
             } catch (IOException e) {
                 e.printStackTrace();
